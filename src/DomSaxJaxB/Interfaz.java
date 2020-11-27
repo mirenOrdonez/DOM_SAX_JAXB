@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Dom;
+package DomSaxJaxB;
 
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -13,8 +13,10 @@ import javax.swing.JFileChooser;
  * @author mirenordonezdearce
  */
 public class Interfaz extends javax.swing.JFrame {
-    //Creo un objeto tipo DOM
+    //Creo un objeto tipo DOM, tipo SAX y tipo JAXB
     DOM gesDOM = new DOM();
+    SAX gesSAX = new SAX();
+    JAXB gesJAXB = new JAXB();
     
     /**
      * Creates new form Interfaz
@@ -34,7 +36,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         salidaTxt = new javax.swing.JTextArea();
-        btnMostrarDom = new javax.swing.JButton();
+        btnMostrarDOM = new javax.swing.JButton();
         lblInfo = new javax.swing.JLabel();
         jLabelTitulo = new javax.swing.JLabel();
         jTextFieldTitulo = new javax.swing.JTextField();
@@ -44,28 +46,34 @@ public class Interfaz extends javax.swing.JFrame {
         jTextFieldAnno = new javax.swing.JTextField();
         btnAnnadir = new javax.swing.JButton();
         btnGuardarDoc = new javax.swing.JButton();
-        jLabelTituloNuevo = new javax.swing.JLabel();
-        jLabelTituloAntiguo = new javax.swing.JLabel();
-        jTextFieldTituloAntiguo = new javax.swing.JTextField();
-        jTextFieldTituloNuevo = new javax.swing.JTextField();
-        btnModificarTitulo = new javax.swing.JButton();
+        jLabelCampoNuevo = new javax.swing.JLabel();
+        jLabelCampoAntiguo = new javax.swing.JLabel();
+        jTextFieldCampoAntiguo = new javax.swing.JTextField();
+        jTextFieldCampoNuevo = new javax.swing.JTextField();
+        btnModificarCampo = new javax.swing.JButton();
+        btnMostrarSAX = new javax.swing.JButton();
+        btnMostrarJAXB = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         Menu = new javax.swing.JMenu();
         abrirDOM = new javax.swing.JMenuItem();
+        abrirSAX = new javax.swing.JMenuItem();
+        abrirJAXB = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         salidaTxt.setEditable(false);
         salidaTxt.setColumns(20);
+        salidaTxt.setLineWrap(true);
         salidaTxt.setRows(5);
+        salidaTxt.setWrapStyleWord(true);
         jScrollPane1.setViewportView(salidaTxt);
 
-        btnMostrarDom.setFont(new java.awt.Font("Helvetica Neue", 0, 13)); // NOI18N
-        btnMostrarDom.setText("Mostrar Dom");
-        btnMostrarDom.setEnabled(false);
-        btnMostrarDom.addActionListener(new java.awt.event.ActionListener() {
+        btnMostrarDOM.setFont(new java.awt.Font("Helvetica Neue", 0, 13)); // NOI18N
+        btnMostrarDOM.setText("Mostrar Dom");
+        btnMostrarDOM.setEnabled(false);
+        btnMostrarDOM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMostrarDomActionPerformed(evt);
+                btnMostrarDOMActionPerformed(evt);
             }
         });
 
@@ -107,36 +115,68 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        jLabelTituloNuevo.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
-        jLabelTituloNuevo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTituloNuevo.setText("Campo nuevo:");
+        jLabelCampoNuevo.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        jLabelCampoNuevo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCampoNuevo.setText("Campo nuevo:");
 
-        jLabelTituloAntiguo.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
-        jLabelTituloAntiguo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTituloAntiguo.setText("Campo antiguo:");
+        jLabelCampoAntiguo.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        jLabelCampoAntiguo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCampoAntiguo.setText("Campo antiguo:");
 
-        jTextFieldTituloAntiguo.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        jTextFieldCampoAntiguo.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
 
-        jTextFieldTituloNuevo.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        jTextFieldCampoNuevo.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
 
-        btnModificarTitulo.setFont(new java.awt.Font("Helvetica Neue", 0, 13)); // NOI18N
-        btnModificarTitulo.setText("Modificar campo");
-        btnModificarTitulo.setEnabled(false);
-        btnModificarTitulo.addActionListener(new java.awt.event.ActionListener() {
+        btnModificarCampo.setFont(new java.awt.Font("Helvetica Neue", 0, 13)); // NOI18N
+        btnModificarCampo.setText("Modificar campo");
+        btnModificarCampo.setEnabled(false);
+        btnModificarCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarTituloActionPerformed(evt);
+                btnModificarCampoActionPerformed(evt);
+            }
+        });
+
+        btnMostrarSAX.setText("Mostrar SAX");
+        btnMostrarSAX.setEnabled(false);
+        btnMostrarSAX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarSAXActionPerformed(evt);
+            }
+        });
+
+        btnMostrarJAXB.setText("Mostrar JAXB");
+        btnMostrarJAXB.setEnabled(false);
+        btnMostrarJAXB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarJAXBActionPerformed(evt);
             }
         });
 
         Menu.setText("Menu");
 
-        abrirDOM.setText("Abrir Dom");
+        abrirDOM.setText("Abrir DOM");
         abrirDOM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrirDOMActionPerformed(evt);
             }
         });
         Menu.add(abrirDOM);
+
+        abrirSAX.setText("Abrir SAX");
+        abrirSAX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirSAXActionPerformed(evt);
+            }
+        });
+        Menu.add(abrirSAX);
+
+        abrirJAXB.setText("Abrir JAXB");
+        abrirJAXB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirJAXBActionPerformed(evt);
+            }
+        });
+        Menu.add(abrirJAXB);
 
         jMenuBar1.add(Menu);
 
@@ -147,42 +187,45 @@ public class Interfaz extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldTitulo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldAutor))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelAnno, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldAnno, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAnnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnGuardarDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelTituloAntiguo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelTituloNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldTituloNuevo)
-                                    .addComponent(jTextFieldTituloAntiguo)))
-                            .addComponent(btnModificarTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldTitulo))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(btnMostrarDom)))
+                        .addComponent(jLabelAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldAutor))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelAnno, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldAnno, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAnnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardarDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCampoAntiguo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelCampoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldCampoNuevo)
+                            .addComponent(jTextFieldCampoAntiguo)))
+                    .addComponent(btnModificarCampo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(btnMostrarDOM)
+                .addGap(97, 97, 97)
+                .addComponent(btnMostrarSAX)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMostrarJAXB)
+                .addGap(57, 57, 57))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +233,10 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMostrarDom)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMostrarDOM)
+                    .addComponent(btnMostrarSAX)
+                    .addComponent(btnMostrarJAXB))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -211,14 +257,14 @@ public class Interfaz extends javax.swing.JFrame {
                         .addComponent(btnGuardarDoc)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelTituloAntiguo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldTituloAntiguo))
+                            .addComponent(jLabelCampoAntiguo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldCampoAntiguo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelTituloNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldTituloNuevo))
+                            .addComponent(jLabelCampoNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldCampoNuevo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnModificarTitulo)
+                        .addComponent(btnModificarCampo)
                         .addGap(93, 93, 93))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,23 +279,27 @@ public class Interfaz extends javax.swing.JFrame {
        File fichero = seleccionarFichero();
        if (fichero == null) {
            lblInfo.setText("Debes elegir un fichero");
-           btnMostrarDom.setEnabled(false);
+           btnMostrarDOM.setEnabled(false);
            btnAnnadir.setEnabled(false);
            btnGuardarDoc.setEnabled(false);
-           btnModificarTitulo.setEnabled(false);
+           btnModificarCampo.setEnabled(false);
+           btnMostrarSAX.setEnabled(false);
+           btnMostrarJAXB.setEnabled(false);
        }
        else {
            lblInfo.setText("¡DOM creado!");
-           btnMostrarDom.setEnabled(true);
+           btnMostrarDOM.setEnabled(true);
            btnAnnadir.setEnabled(true);
            btnGuardarDoc.setEnabled(true);
-           btnModificarTitulo.setEnabled(true);
+           btnModificarCampo.setEnabled(true);
            gesDOM.abrir_XML_DOM(fichero);
+           btnMostrarSAX.setEnabled(false);
+           btnMostrarJAXB.setEnabled(false);
        }
        
     }//GEN-LAST:event_abrirDOMActionPerformed
 
-    private void btnMostrarDomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarDomActionPerformed
+    private void btnMostrarDOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarDOMActionPerformed
         //Muestra el DOM a partir de un XML
         try {
             salidaTxt.setText(gesDOM.recorrerDOMyMostrar());
@@ -257,7 +307,7 @@ public class Interfaz extends javax.swing.JFrame {
             lblInfo.setText("Ha ocurrido un error al mostrar el DOM");
         }
         
-    }//GEN-LAST:event_btnMostrarDomActionPerformed
+    }//GEN-LAST:event_btnMostrarDOMActionPerformed
 
     private void btnAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnadirActionPerformed
         //Añade nueva info al DOM
@@ -281,14 +331,81 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGuardarDocActionPerformed
 
-    private void btnModificarTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarTituloActionPerformed
+    private void btnModificarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCampoActionPerformed
         try {
-            gesDOM.modificarDOM(jTextFieldTituloAntiguo.getText(), jTextFieldTituloNuevo.getText());
+            gesDOM.modificarDOM(jTextFieldCampoAntiguo.getText(), jTextFieldCampoNuevo.getText());
             lblInfo.setText("Modificado correctamente");
         } catch (Exception e){
             lblInfo.setText("Ha ocurrido un error al modificar");
         }
-    }//GEN-LAST:event_btnModificarTituloActionPerformed
+    }//GEN-LAST:event_btnModificarCampoActionPerformed
+
+    
+    //SAX
+    private void abrirSAXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirSAXActionPerformed
+        File fichero = seleccionarFichero();
+        if (fichero == null) {
+           lblInfo.setText("Debes elegir un fichero");
+           btnMostrarDOM.setEnabled(false);
+           btnAnnadir.setEnabled(false);
+           btnGuardarDoc.setEnabled(false);
+           btnModificarCampo.setEnabled(false);
+           btnMostrarSAX.setEnabled(false);
+           btnMostrarJAXB.setEnabled(false);
+       }
+       else {
+           lblInfo.setText("¡SAX listo!");
+           btnMostrarDOM.setEnabled(false);
+           btnAnnadir.setEnabled(false);
+           btnGuardarDoc.setEnabled(false);
+           btnModificarCampo.setEnabled(false);
+           btnMostrarSAX.setEnabled(true);
+           gesSAX.abrir_XML_SAX(fichero);
+           btnMostrarJAXB.setEnabled(false);
+       }
+    }//GEN-LAST:event_abrirSAXActionPerformed
+
+    private void btnMostrarSAXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarSAXActionPerformed
+        //Muestra el SAX a partir de un XML
+        try {
+            salidaTxt.setText( gesSAX.recorrerSAX());
+            //salidaTxt.setText(gesSAX.recorrerSAX());
+        } catch (Exception e) {
+            lblInfo.setText("Ha ocurrido un error al mostrar el SAX");
+        }
+    }//GEN-LAST:event_btnMostrarSAXActionPerformed
+
+    private void abrirJAXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirJAXBActionPerformed
+        File fichero = seleccionarFichero();
+        if (fichero == null) {
+           lblInfo.setText("Debes elegir un fichero");
+           btnMostrarDOM.setEnabled(false);
+           btnAnnadir.setEnabled(false);
+           btnGuardarDoc.setEnabled(false);
+           btnModificarCampo.setEnabled(false);
+           btnMostrarSAX.setEnabled(false);
+           btnMostrarJAXB.setEnabled(false);
+       }
+       else {
+           lblInfo.setText("¡JAXB listo!");
+           btnMostrarDOM.setEnabled(false);
+           btnAnnadir.setEnabled(false);
+           btnGuardarDoc.setEnabled(false);
+           btnModificarCampo.setEnabled(false);
+           btnMostrarSAX.setEnabled(false);
+           btnMostrarJAXB.setEnabled(true);
+           gesJAXB.abrir_XML_JAXB(fichero);
+       }
+    }//GEN-LAST:event_abrirJAXBActionPerformed
+
+    private void btnMostrarJAXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarJAXBActionPerformed
+        //Muestra el JAXB a partir de un XML
+        try {
+            salidaTxt.setText(gesJAXB.recorrerJAXB());
+        } catch (Exception e) {
+            lblInfo.setText("Ha ocurrido un error al mostrar el JAXB");
+        }
+    }//GEN-LAST:event_btnMostrarJAXBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,22 +445,26 @@ public class Interfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Menu;
     private javax.swing.JMenuItem abrirDOM;
+    private javax.swing.JMenuItem abrirJAXB;
+    private javax.swing.JMenuItem abrirSAX;
     private javax.swing.JButton btnAnnadir;
     private javax.swing.JButton btnGuardarDoc;
-    private javax.swing.JButton btnModificarTitulo;
-    private javax.swing.JButton btnMostrarDom;
+    private javax.swing.JButton btnModificarCampo;
+    private javax.swing.JButton btnMostrarDOM;
+    private javax.swing.JButton btnMostrarJAXB;
+    private javax.swing.JButton btnMostrarSAX;
     private javax.swing.JLabel jLabelAnno;
     private javax.swing.JLabel jLabelAutor;
+    private javax.swing.JLabel jLabelCampoAntiguo;
+    private javax.swing.JLabel jLabelCampoNuevo;
     private javax.swing.JLabel jLabelTitulo;
-    private javax.swing.JLabel jLabelTituloAntiguo;
-    private javax.swing.JLabel jLabelTituloNuevo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldAnno;
     private javax.swing.JTextField jTextFieldAutor;
+    private javax.swing.JTextField jTextFieldCampoAntiguo;
+    private javax.swing.JTextField jTextFieldCampoNuevo;
     private javax.swing.JTextField jTextFieldTitulo;
-    private javax.swing.JTextField jTextFieldTituloAntiguo;
-    private javax.swing.JTextField jTextFieldTituloNuevo;
     private javax.swing.JLabel lblInfo;
     private javax.swing.JTextArea salidaTxt;
     // End of variables declaration//GEN-END:variables

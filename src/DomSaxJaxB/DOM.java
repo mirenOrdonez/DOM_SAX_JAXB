@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Dom;
+package DomSaxJaxB;
 
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
@@ -143,7 +143,7 @@ public class DOM {
         //Y una lista con todos los hijos del nodo raíz
         NodeList nodeList = raiz.getChildNodes();
         
-        //Por cada hijo, ejecuta modifLibro
+        //Por cada hijo, ejecuta modificarCampo
         for (int i=0; i < nodeList.getLength(); i++) {
             node = nodeList.item(i);
             

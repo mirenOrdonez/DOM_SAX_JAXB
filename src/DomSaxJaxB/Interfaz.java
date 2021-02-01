@@ -324,7 +324,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void btnGuardarDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarDocActionPerformed
         //Guarda un nuevo archivo con los añadidos.
         try {
-            gesDOM.guardarDOMcomoFile();
+            //gesDOM.guardarDOMcomoFile();
             lblInfo.setText("Fichero guardado correctamente");
         } catch (Exception e) {
             lblInfo.setText("Error al guardar el fichero");

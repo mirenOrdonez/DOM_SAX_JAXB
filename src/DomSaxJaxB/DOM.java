@@ -116,24 +116,24 @@ public class DOM {
         }
     }
     
-    public int guardarDOMcomoFile() {
-        try {
-            //Creamos fichero
-            File archivo_XML = new File ("salida.xml");
-            //Especificamos el formato
-            OutputFormat format = new OutputFormat(doc);
-            //Indentamos el fichero
-            format.setIndenting(true);
-            //Escribimos el contenido en el FILE
-            XMLSerializer serializer = 
-                    new XMLSerializer (new FileOutputStream(archivo_XML), format);
-            serializer.serialize(doc);
-            return 0;
-        } catch (Exception e) {
-            return -1;
-        }
-        
-    }
+//    public int guardarDOMcomoFile() {
+//        try {
+//            //Creamos fichero
+//            File archivo_XML = new File ("salida.xml");
+//            //Especificamos el formato
+//            OutputFormat format = new OutputFormat( doc);
+//            //Indentamos el fichero
+//            format.setIndenting(true);
+//            //Escribimos el contenido en el FILE
+//            XMLSerializer serializer = 
+//                    new XMLSerializer (new FileOutputStream(archivo_XML), format);
+//            serializer.serialize(doc);
+//            return 0;
+//        } catch (Exception e) {
+//            return -1;
+//        }
+//        
+//    }
     
     public void modificarDOM (String nombreAntiguo, String nombreNuevo) {
         Node node;
